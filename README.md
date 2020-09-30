@@ -6,7 +6,42 @@ A Hive Helsinki project on handling docker and docker-machine and understanding 
 2. Dockerfiles
 3. Bonus part
 
+The most important resource in learning Docker: [Docker docs](https://docs.docker.com/)
+
 ---
 
+## How to Docker
+
+### Creating our first VM
+
+The first task is to [create](https://docs.docker.com/machine/reference/create/) a virtual machine with docker-machine
+
+`docker-machine create --driver virtualbox Char`
+
+[Get the ip](https://docs.docker.com/machine/reference/ip/) of the VM with the command
+
+`docker-machine ip Char`
+
+Now we need to run `docker ps` without errors. If we now run `docker ps`we get an error because we are not connected to our VM. We can fix it all in one [command](https://docs.docker.com/v17.09/machine/reference/env/):
+
+`eval $(docker-machine env Char)`
+
+### Fetching the hello-world container
+
+[Fetch](https://docs.docker.com/engine/reference/commandline/pull/) using `docker pull hello-world` and then [launch](https://docs.docker.com/engine/reference/run/) using `docker run hello-world`
+
+### Launching an nginx container
+
+`docker run -d -p 5000:80 --name overlord --restart=always nginx`
+
+The -d flag means that it's detached, then we attach its port 80 to port 5000 of our VM Char. We assign the name to be __overlord__ and restart mode as always. Finally we define the container to be nginx.
+
+Now we should be able to access the container at `http://ip.address.of.char:5000/`
+
+Finally, the ip address of overlord can be fetched without actually starting its shell with the [__inspect__](https://docs.docker.com/engine/reference/commandline/inspect/) command
+
+`docker inspect -f '{{ .NetworkSettings.IPAddress }}' overlord`
+
+### Launching an [alpine](https://hub.docker.com/_/alpine) container shell
 
 
