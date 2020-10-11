@@ -2,7 +2,7 @@
 
 When starting/stopping an existing machine: 
 - `docker-machine start [name]`
-- `docker-machine stop [name]
+- `docker-machine stop [name]`
 
 When removing a container:
 - `docker container rm [name]`
