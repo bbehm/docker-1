@@ -44,4 +44,7 @@ Finally, the ip address of overlord can be fetched without actually starting its
 
 ### Launching an [alpine](https://hub.docker.com/_/alpine) container shell
 
+We want to create an alpine container from which we launch a shell. The container should remove itself once the execution is done. By adding the flags __i__ and __t__ we tell Docker we want an __interactive__ session and allocate a pseudo __TTY__. More info [here](https://stackoverflow.com/questions/35689628/starting-a-shell-in-the-docker-alpine-container#%20alpine-container/43564198#43564198). The __--rm__ means that we automatically remove the container when it exits.
+
+`docker run -it --rm alpine /bin/sh`
 
