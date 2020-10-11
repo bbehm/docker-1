@@ -1,7 +1,8 @@
 ## General useful info and theory on Docker! 🐳
 
-When starting an existing machine: 
+When starting/stopping an existing machine: 
 - `docker-machine start [name]`
+- `docker-machine stop [name]
 
 When removing a container:
 - `docker container rm [name]`
