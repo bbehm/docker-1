@@ -71,4 +71,17 @@ To check that everything is configured correctly we can run
 ```
 docker inspect -f '{{.Config.Env}}' spawning-pool
 ```
+### Launching a [Wordpress](https://hub.docker.com/_/wordpress) container
+
+Again as a background task, the container's (named lair) port 80 should be bound the port 8080 of the VM. It should be able to use the spawning-pool container as a database service.
+
+- with __-p 8080:80__ we specify the port connection
+- with __--link spawning-pool__ we link it to the database
+  - here we again specify the WORDPRESS_DB_HOST='spawning-pool', WORDPRESS_DB_USER='root', WORDPRESS_DB_PASSWORD and WORDPRESS_DB_NAME='zerglings'
+  
+```
+docker run -d --name lair -p 8080:80 --link spawning-pool -e WORDPRESS_DB_HOST='spawning-pool' -e WORDPRESS_DB_USER='root' -e WORDPRESS_DB_PASSWORD='Kerrigan' -e WORDPRESS_DB_NAME='zerglings' wordpress
+```
+We can check it out in a web browser using `http://IP.of.the.VM.8080/`
+
 
