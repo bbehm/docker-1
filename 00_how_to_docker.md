@@ -52,3 +52,23 @@ Here we first check if we need to update any packages and then we install the pa
 `docker volume create hatchery`
 
 Now we have a volume called hatchery. We can list all existing volumes with the command `docker volume ls`.
+
+### Launching a [MySQL](https://hub.docker.com/_/mysql) container as a background task
+
+We will create the container (named spawning-pool) so that it restarts on it's own and stores the database (named Zerglings) in the Hatchery volume that we created.
+
+- We make it __--restart=on-failure:10__.
+- The __-d__ flag means detach (the container runs in the background).
+- The __-e__ flag means that we specify the environment variables
+  - __MYSQL_ROOT_PASSWORD__ to set password
+  - __MYSQL_DATABASE__ to specify database name to zerglings, after that we add __-v__ with the Volume and its path
+  - Finally, *mysql --default-authentication-plugin=mysql_native_password* is needed for wordpress in later exercises
+  
+```
+docker run -d --name spawning-pool --restart=on-failure:10 -e MYSQL_ROOT_PASSWORD=Kerrigan -e MYSQL_DATABASE=zerglings -v hatchery:/var/lib/mysql mysql --default-authentication-plugin=mysql_native_password
+```
+To check that everything is configured correctly we can run
+```
+docker inspect -f '{{.Config.Env}}' spawning-pool
+```
+
