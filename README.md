@@ -10,6 +10,6 @@ The most important resource in learning Docker: [Docker docs](https://docs.docke
 
 ---
 
-Each part is described as a more detailed guide in their respective markdown files!
+Each part is described as a more detailed guide in their respective markdown files and the commands and docker files can be found in the respective folders!
 
 ___
