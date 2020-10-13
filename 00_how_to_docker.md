@@ -84,4 +84,34 @@ docker run -d --name lair -p 8080:80 --link spawning-pool -e WORDPRESS_DB_HOST='
 ```
 We can check it out in a web browser using `http://IP.of.the.VM.8080/`
 
+### Launching a [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/) container
+
+Here when we connect the phpMyAdmin container to the MySQL database - check out full tutorial [here](https://medium.com/@migueldoctor/run-mysql-phpmyadmin-locally-in-3-steps-using-docker-74eb735fa1fc). The *--link* option provides access to another container running in the host. We need to specify the name of our container (*spawning-pool*) and the resource accessed (*db*).
+```
+docker run -d --name roach-warden -p 8081:80 --link spawning-pool:db phpmyadmin/phpmyadmin
+```
+Without running the __spawning-pool__ shell we can look up the container's [log in real time](https://success.mirantis.com/article/view-realtime-container-logging) using the command
+```
+docker logs -f spawning-pool
+```
+
+### Displaying active containers and relaunching containers
+
+- To [display active containers](https://docs.docker.com/engine/reference/commandline/ps/) on a VM we use the command `docker ps`
+- To [restart](https://docs.docker.com/engine/reference/commandline/restart/) the overlord container we use the command `docker restart overlord`
+
+### Launching a [Python](https://hub.docker.com/_/python) container with [Flask](https://palletsprojects.com/p/flask/)
+
+`docker run -v ~/:/root --name Abathur -p 3000:3000 -dit python:2-slim`
+
+To install Flask we need to run a command within the Python container, for this we use [docker exec](https://docs.docker.com/engine/reference/commandline/exec/).
+
+`docker exec Abathur pip install Flask`
+
+We have to write our code into hello.py and then by running the command
+`docker exec -e FLASK_APP=/root/hello.py Abathur flask run --host=0.0.0.0 --port=3000`
+it can be accessed on `http://IP.of.the.VM.3000/`
+
+### Creating a local [swarm](https://docs.docker.com/engine/swarm/admin_guide/)
+
 
