@@ -114,4 +114,35 @@ it can be accessed on `http://IP.of.the.VM.3000/`
 
 ### Creating a local [swarm](https://docs.docker.com/engine/swarm/admin_guide/)
 
+[What is a Docker swarm?](https://www.sumologic.com/glossary/docker-swarm/)
 
+First we need to initialize a swarm and connect it to the IP of the swarm manager (*Char*)
+
+```
+docker swarm init --advertise-addr $(docker-machine ip Char)
+```
+We can check that Char is the manager with the command `docker node ls` or `docker info`.
+
+### Creating another VM and make it a worker of the local swarm
+
+Let's create another VM called Aiur `docker-machine create --driver virtualbox Aiur`.
+
+With the following command we can add Aiur as a worker to the swarm while being connected to the Char VM. We use the command [__docker swarm join__](https://docs.docker.com/engine/reference/commandline/swarm_join/), the port *2377* is defined in the documentation. Being a worker basically means not being the manager.
+
+```
+docker-machine ssh Aiur "docker swarm join --token $(docker swarm join-token worker -q) $(docker-machine ip Char):2377"
+```
+Now we can again check that the command was succesful with `docker node ls`.
+
+### Creating an overlay-type internal network
+
+We can create an overlay internal network called overmind with the command `docker network create -d overlay overmind`.
+
+### Launching a [rabbitmq](https://hub.docker.com/_/rabbitmq) service
+
+Read [this](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/) to find out how services work. We define the name to be __orbital-command__ and it to be on the __overmind__ network.
+
+```
+docker service create --name orbital-command --network overmind -e RABBITMQ_DEFAULT_USER=username -e RABBITMQ_DEFAULT_PASS=password rabbitmq
+```
+We can list all the services of the local swarm with the command `docker service ls`.
