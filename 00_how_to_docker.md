@@ -159,9 +159,13 @@ To get the real-time logs of the service, we use the command: `docker service lo
 
 Now let's launch a Launch a [42school/marine-squad](https://hub.docker.com/r/42school/marine-squad/) in to replicas. This will be named __marines__ and will be on the __overmind__ network. Check with `docker service ls`. List all tasks with `docker service ps marines`.
 
-### [Scaling](https://docs.docker.com/engine/reference/commandline/service_scale/) the marines to 20
+### [Scaling](https://docs.docker.com/engine/reference/commandline/service_scale/) the marines to 20!
 
 By using the docker service scale command we can increase the amount of marines to 20 with the command `docker service scale -d marines=20`.
 
 ### Deleting services, containers, images and virtual machines
 
+- force quit and delete all services by `docker service rm $(docker service ls -q)`
+- force quit and delete all containers by `docker rm -f $(docker ps -aq)`
+- force quit and delete all images by `docker rmi $(docker images -aq)`
+- Delete the Aiur VM by `docker-machine rm -y Aiur`
