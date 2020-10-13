@@ -3,6 +3,7 @@
 When starting/stopping an existing machine: 
 - `docker-machine start [name]`
 - `docker-machine stop [name]`
+- `eval $(docker-machine env Char)`
 
 When removing a container:
 - `docker container rm [name]`
