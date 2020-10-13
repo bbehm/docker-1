@@ -146,3 +146,22 @@ Read [this](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
 docker service create --name orbital-command --network overmind -e RABBITMQ_DEFAULT_USER=username -e RABBITMQ_DEFAULT_PASS=password rabbitmq
 ```
 We can list all the services of the local swarm with the command `docker service ls`.
+
+### Launching a [42school/engineering-bay](https://hub.docker.com/r/42school/engineering-bay/) service in two replicas
+
+The service will be named __engineering-bay__ and will be on the __overmind__ network.
+```
+docker service create --name engineering-bay --network overmind --replicas 2 -e OC_USERNAME=bianca -e OC_PASSWD=bianca 42school/engineering-bay
+```
+We can check that the two replicas are running with the command `docker service ps engineering-bay`.
+
+To get the real-time logs of the service, we use the command: `docker service logs engineering-bay`.
+
+Now let's launch a Launch a [42school/marine-squad](https://hub.docker.com/r/42school/marine-squad/) in to replicas. This will be named __marines__ and will be on the __overmind__ network. Check with `docker service ls`. List all tasks with `docker service ps marines`.
+
+### [Scaling](https://docs.docker.com/engine/reference/commandline/service_scale/) the marines to 20
+
+By using the docker service scale command we can increase the amount of marines to 20 with the command `docker service scale -d marines=20`.
+
+### Deleting services, containers, images and virtual machines
+
