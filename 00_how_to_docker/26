@@ -1,0 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    26                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/13 16:37:31 by bbehm             #+#    #+#              #
+#    Updated: 2020/10/13 16:54:37 by bbehm            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+docker service create --name engineering-bay --network overmind --replicas 2\
+	-e OC_USERNAME=bianca -e OC_PASSWD=bianca 42school/engineering-bay

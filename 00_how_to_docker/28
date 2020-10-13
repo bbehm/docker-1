@@ -1,0 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    28                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/13 16:49:43 by bbehm             #+#    #+#              #
+#    Updated: 2020/10/13 16:54:22 by bbehm            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+docker service create --name marines --network overmind --replicas 2 -e \
+	OC_USERNAME=bianca -e OC_PASSWD=bianca 42school/marine-squad
