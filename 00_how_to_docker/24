@@ -1,0 +1,13 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    24                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/13 16:25:11 by bbehm             #+#    #+#              #
+#    Updated: 2020/10/13 16:29:24 by bbehm            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+docker service create --name orbital-command --network overmind -e RABBITMQ_DEFAULT_USER=bianca -e RABBITMQ_DEFAULT_PASS=bianca rabbitmq
