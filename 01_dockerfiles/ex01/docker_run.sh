@@ -1,23 +1,15 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    docker_run.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: bbehm <bbehm@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/10/13 19:57:38 by bbehm             #+#    #+#              #
-#    Updated: 2020/10/13 20:53:13 by bbehm            ###   ########.fr        #
+#    Created: 2020/10/13 20:12:23 by bbehm             #+#    #+#              #
+#    Updated: 2020/10/13 20:39:37 by bbehm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian
-ENV TS3SERVER_LICENSE=accept
-WORKDIR /home/teamspeak
-EXPOSE 9987/udp 10011 30033
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y wget bzip2
-RUN wget http://dl.4players.de/ts/releases/3.7.1/teamspeak3-server_linux_amd64-3.7.1.tar.bz2
-RUN tar -xvf teamspeak3-server_linux_amd64-3.7.1.tar.bz2
+#!/bin/bash
 
-WORKDIR teamspeak3-server_linux_amd64
-ENTRYPOINT sh ts3server_minimal_runscript.sh
+docker run -d --name teamspeak --rm -p 9987:9987/udp -p 10011:10011 -p 30033:30033 ex01
