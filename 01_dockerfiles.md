@@ -7,7 +7,7 @@ A Dockerfile is a textfile that contains __all commands needed to build a given 
 
 ---
 
-### Ex00 - Building an alpine image with vim
+### Ex00 - Building an [alpine](https://hub.docker.com/_/alpine) image with vim
 
 Let's create an alpine image with our favorite text editor (vim) which will launch when we launch the container.
 
@@ -17,6 +17,8 @@ RUN apk update && apk upgrade && apk add vim
 ENTRYPOINT vim
 ```
 To test run the Dockerfile we need to run `docker build -t ex00 .`, then `docker run -it --rm ex00`
+
+---
 
 ### Ex01 - Building my own [Teamspeak](https://teamspeak.com/en/) server
 
@@ -42,6 +44,8 @@ __Then:__
 
 When we run it we get a token which we will use to access the teamspeak server through the [teamspeak client](https://teamspeak.com/en/downloads/) (needs to be downloaded separately). In the teamspeak client we need to use the IP of the virtual machine Char as the server address and the token as the server password. 
 
+---
+
 ### Ex02 - Containerizing [Rails](https://rubyonrails.org/) applications
 
 Creating one generic Dockerfile that is called by another.
@@ -59,8 +63,14 @@ FROM ft-rails:on-build
 EXPOSE 3000
 CMD	["rails", "s", "-b", "0.0.0.0", "-p", "3000"]
 ```
+I used this [example](https://github.com/RailsApps/rails-signup-thankyou) Rails app to test the container.
 
 1. `docker build -t ft-rails:on-build .`
 2. `docker build -t ex02 . && docker run -it --rm -p 3000:3000 ex02`
 
+When running it you should be able to see the app on `IP.of.your.VM:3000`.
+
+---
+
+### Ex03 - Getting the development version of [Gitlab - Community Edition](https://gitlab.com/gitlab-org/gitlab-foss)
 
