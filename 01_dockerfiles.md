@@ -74,3 +74,16 @@ When running it you should be able to see the app on `IP.of.your.VM:3000`.
 
 ### Ex03 - Getting the development version of [Gitlab - Community Edition](https://gitlab.com/gitlab-org/gitlab-foss)
 
+ISSUES, ISSUES, ISSUES
+
+From a debian container we first install packages we need (wget, openssh-sercer, ca-certificates and postfix).
+
+Then we get the gitlab 
+
+For gitlab to work we need to reconfigure some settings - thus we set the entrypoint to be the setup and after configuring that, gitlab will open up automatically. __Tail__ is added to keep the container running.
+
+`ENTRYPOINT service ssh start && (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && gitlab-ctl tail`
+
+When the setop is done we can open gitlab in a browser with `IP.of.the.VM:8080`. There we need to set up a password and then we can access it.
+
+__Note!__ Building seems to take a very long time, to solve this issue I used [--shm-size](https://stackoverflow.com/questions/30210362/how-to-increase-the-size-of-the-dev-shm-in-docker-container) when building.
