@@ -74,7 +74,9 @@ When running it you should be able to see the app on `IP.of.your.VM:3000`.
 
 ### Ex03 - Getting the development version of [Gitlab - Community Edition](https://gitlab.com/gitlab-org/gitlab-foss)
 
-ISSUES, ISSUES, ISSUES
+STILL ISSUES..
+
+[This](https://medium.com/@1997corry/running-your-own-gitlab-on-docker-community-edition-39c4a8f99553) medium post is a life saver!
 
 From a debian container we first install packages we need (wget, openssh-sercer, ca-certificates and postfix).
 
