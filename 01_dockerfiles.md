@@ -88,4 +88,10 @@ For gitlab to work we need to reconfigure some settings - thus we set the entryp
 
 When the setop is done we can open gitlab in a browser with `IP.of.the.VM:8080`. There we need to set up a password and then we can access it.
 
+```
+docker ps # find container id
+docker exec -i -t <containerid> /bin/bash
+service ssh start
+```
+
 __Note!__ Building seems to take a very long time, to solve this issue I used [--shm-size](https://stackoverflow.com/questions/30210362/how-to-increase-the-size-of-the-dev-shm-in-docker-container) when building.
